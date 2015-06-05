@@ -12,11 +12,10 @@ import signal
 import logging
 
 ### Standard Values ###
-#cwd = os.getcwd()
-cwd = "/opt/dbg_games/scripts"
+install_dir = "/opt/Splunk_App_For_Planetside2/External_Scripts/scripts"
 
 ### Set Up Logging ###
-log_file=cwd + '/../logs/streaming.log'
+log_file=install_dir + '/../logs/streaming.log'
 
 logging.basicConfig(filename=log_file,
     level=logging.DEBUG,
@@ -31,45 +30,12 @@ if len(sys.argv) <= 1:
   logging.info('[main] - Missing argument - exiting.')
   sys.exit(1)
 
-### Setup the pidfile
-pid = str(os.getpid())
-pidfile = cwd + "/dbg_streaming.pid"
-
-### Check to see if the pid file exists, and if it does, is the process still running?
-if os.path.isfile(pidfile):
-  with open(pidfile,'r') as f:  
-    pidnumber=f.read()
-
-    ### Check /proc/$pidnumber$/cmdline to see if the command line matches ours
-    proc="/proc/" + pidnumber + "/cmdline"
-  
-    if os.path.isfile(proc):
-      with open(proc) as proc:
-        cmdline=proc.read()
-
-        cmdsearch=re.search( r'DBG_Streaming_Events.py',cmdline,re.M|re.I)
-
-        ##If command line matches ours, kill the previous version and restart
-        if cmdsearch:
-          logging.info ('[main] - found previously running process. Killing pid %s' % pidnumber)
-          os.kill(int(pidnumber), signal.SIGTERM)
-  
-        ###Not our process, so stale pid and needs cleaning up
-        else:
-          logging.info ('[main] - Stale PID found, cleaning pid file.')
-          os.remove(pidfile)
-    else:
-      logging.info ('[main] - Stale PID found, cleaning pid file.')
-      os.remove(pidfile)
-
-file(pidfile, 'w').write(pid)
-
 ### Open the output file ###
-data_file=cwd + '/../data/dbg_streaming_events.log'
+data_file=install_dir + '/../data/dbg_streaming_events.log'
 datafile = open(data_file,'a',0)
 
 ### Dynamically load eggs ###
-egg_dir = cwd + '/../eggs/'
+egg_dir = install_dir + '/../eggs/'
 
 for filename in os.listdir(egg_dir):
   if filename.endswith(".egg"):
@@ -120,4 +86,3 @@ try:
   ws.run_forever()
 except KeyboardInterrupt:
   ws.close()
-  os.remove(pidfile)
