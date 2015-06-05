@@ -1,0 +1,13 @@
+[Unit]
+Description=DBG Streaming Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/opt/dbg_games/scripts/DBG_Streaming_Events.py ozzy75
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
