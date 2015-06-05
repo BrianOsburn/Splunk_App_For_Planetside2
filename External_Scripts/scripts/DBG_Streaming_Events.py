@@ -66,7 +66,7 @@ file(pidfile, 'w').write(pid)
 
 ### Open the output file ###
 data_file=cwd + '/../data/dbg_streaming_events.log'
-datafile = open(data_file,'a')
+datafile = open(data_file,'a',0)
 
 ### Dynamically load eggs ###
 egg_dir = cwd + '/../eggs/'
@@ -85,8 +85,7 @@ class DBGClient(WebSocketClient):
   {
 	  "service":"event",
 	  "action":"subscribe",
-	  "worlds":["all"],
-      "characters":["all"],
+	  "worlds":["17"],
 	  "eventNames":["PlayerLogin","PlayerLogout","AchievementEarned","BattleRankUp","Death","VehicleDestroy","PlayerFacilityCapture","PlayerFacilityDefend","ContinentLock","ContinentUnlock","FacilityControl","MetagameEvent"]
 }
         """
