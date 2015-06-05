@@ -1,0 +1,15 @@
+/opt/dbg_games/logs/streaming.log {
+    missingok
+    daily
+    copytruncate
+    dateext
+    maxage 60
+}
+
+/opt/dbg_games/data/dbg_streaming_events.log {
+    missingok
+    daily
+    copytruncate
+    dateext
+    maxage 60
+}
