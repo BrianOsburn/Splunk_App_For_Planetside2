@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-ExecStart=/opt/dbg_games/scripts/DBG_Streaming_Events.py ozzy75
+ExecStart=/opt/Splunk_App_For_Planetside2/External_Scripts/scripts/DBG_Streaming_Events.py ozzy75
 Restart=always
 
 

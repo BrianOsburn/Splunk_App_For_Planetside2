@@ -1,4 +1,4 @@
-/opt/dbg_games/logs/streaming.log {
+/opt/Splunk_App_For_Planetside2/External_Scripts/logs/streaming.log {
     missingok
     daily
     copytruncate
@@ -6,7 +6,7 @@
     maxage 60
 }
 
-/opt/dbg_games/data/dbg_streaming_events.log {
+/opt/Splunk_App_For_Planetside2/External_Scripts/data/dbg_streaming_events.log {
     missingok
     daily
     copytruncate
